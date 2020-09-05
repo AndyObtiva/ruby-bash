@@ -1,12 +1,15 @@
 # ruby-bash
+[![Gem Version](https://badge.fury.io/rb/ruby-bash.svg)](https://badge.fury.io/rb/ruby-bash)
 
 User-Friendly Versions of Bash Commands Built in Ruby
 
-## gdr
+## Commands
 
-`gdr` (go to directory) enables browsing and changing directories starting from current path
+### gdr
 
-It is a more efficient replacement of using `cd` & `ls` when changing directories.
+`gdr` (go to directory): enables interactive browsing and changing of directories starting from the current path
+
+It is a versatile, efficient, and user-friendly replacement of using `cd` & `ls` when changing directories.
 
 ## Pre-requisites
 
