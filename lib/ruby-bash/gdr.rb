@@ -1,21 +1,56 @@
 $LOAD_PATH.unshift(File.expand_path('../..', __FILE__))
 
-puts "== gdr - ruby-bash version #{File.read(File.expand_path('../../../VERSION', __FILE__)).strip} =="
+puts "== gdr (go to directory) - ruby-bash - version #{File.read(File.expand_path('../../../VERSION', __FILE__)).strip} =="
 
 require 'tty-prompt'
 require 'fileutils'
 
-prompt = TTY::Prompt.new  
+original_path = FileUtils.pwd
+prompt = TTY::Prompt.new
 
-begin  
+prompt.on(:keypress) do |event|
+  if event.value == "\u0018" # CTRL+X
+    puts # a new line is needed
+    puts "Exiting at path: #{FileUtils.pwd}"
+    command = "cd #{FileUtils.pwd}"
+    puts command
+    home_dir = `echo ~`.strip
+    File.write("#{home_dir}/.ruby_bash_command_gdr", command)  
+    exit(0)
+  end
+end
+
+DIRS = [FileUtils.pwd]
+prompt.on(:keyescape) do |event|
+  if DIRS[-2]
+    # first delete anything the user might have typed
+    100.times {prompt.trigger(:keybackspace)} 
+    
+    if DIRS[-2].include?(DIRS[-1])
+      DIRS[-2].sub(DIRS[-1], '').gsub('/', '').chars.each do |char|
+        event = TTY::Reader::KeyEvent.from(prompt.reader.console.keys, char, '')      
+        prompt.trigger(:keypress, event)
+      end
+    end
+    
+    # remove the last 2 entries, since we're abandoning the last one and we will repush the one before it
+    DIRS.pop
+    DIRS.pop
+     
+    prompt.trigger(:keyenter)
+  end
+end
+
+begin
   loop do
     exception = nil
     dir_lines = `ls -l | grep '^d'`.split("\n")
     dir_lines = ['..'] + dir_lines unless FileUtils.pwd == '/'
-    dir_line = prompt.select("Choose a directory: ", dir_lines, cycle: true, per_page: 40, filter: true, help: "\nCurrent: #{FileUtils.pwd} (CTRL+C to exit)#{"\nexception" if exception}", show_help: :always)
-      
+    dir_line = prompt.select("Choose a directory: ", dir_lines, cycle: true, per_page: 40, filter: true, help: "\nCurrent: #{FileUtils.pwd} (Type to filter / ESC to go back / CTRL+X to go to directory / CTRL+C to abort back to original path)#{"\n#{exception}" if exception}", show_help: :always)
+    
     dir = dir_line.split.last
     begin
+      DIRS << File.expand_path(File.join(FileUtils.pwd, dir))
       FileUtils.cd dir
     rescue => e
       exception = e
@@ -24,10 +59,6 @@ begin
 rescue TTY::Reader::InputInterrupt => e
   # No Op
   puts # a new line is needed
-  puts "Exiting at path: #{FileUtils.pwd}"
-  command = "cd #{FileUtils.pwd}"
-  puts command
-  home_dir = `echo ~`.strip
-  File.write("#{home_dir}/.ruby_bash_command_gdr", command)    
+  puts "Back to original path (abort detected): #{original_path}"
+  exit(0)
 end
-# TODO support abort back to original path

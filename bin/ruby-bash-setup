@@ -1,10 +1,20 @@
 #!/usr/bin/env ruby
 
 version = File.read(File.expand_path('../../VERSION', __FILE__)).strip
+puts
 puts "== gdr-setup - ruby-bash version #{version} =="
+puts
 
-ruby = `which ruby`.strip
-command = "#{ruby} #{File.expand_path('../../lib/ruby-bash/gdr.rb', __FILE__)}"
+ruby = `which ruby`
+ruby = `which jruby` if ruby.to_s.strip.empty?
+ruby = ruby.strip
+rvm_exist = `which rvm`.strip
+if rvm_exist.empty?
+  command = "#{ruby} #{File.expand_path('../../lib/ruby-bash/gdr.rb', __FILE__)}"
+else
+  rvm = `rvm current`.strip
+  command = "rvm #{rvm} do #{ruby} #{File.expand_path('../../lib/ruby-bash/gdr.rb', __FILE__)}"
+end
 
 ruby_bash_gdr_script = <<~SHELL_SCRIPT
   function gdr()
@@ -37,7 +47,10 @@ unless bash_profile.split("\n").detect {|line| line.include?(ruby_bash_source_st
 end
 puts <<~OUTPUT
   ~/#{bash_profile_file_name} has been modified to source ruby-bash functions from ~/.ruby_bash_source
+  
   The following command has been added:
   * `gdr` (go to directory): enables browsing and changing directories starting from current path
+  
   To use, open a new terminal or source ~/.ruby_bash_source manually
+  
 OUTPUT
