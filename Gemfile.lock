@@ -3,6 +3,7 @@ GEM
   specs:
     addressable (2.7.0)
       public_suffix (>= 2.0.2, < 5.0)
+    awesome_print (1.8.0)
     builder (3.2.4)
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
@@ -31,7 +32,7 @@ GEM
       rake
       rdoc
       semver
-    jwt (2.2.1)
+    jwt (2.2.2)
     mini_portile2 (2.4.0)
     multi_json (1.15.0)
     multi_xml (0.6.0)
@@ -44,7 +45,11 @@ GEM
       multi_json (~> 1.3)
       multi_xml (~> 0.5)
       rack (>= 1.2, < 3)
-    public_suffix (4.0.5)
+    pastel (0.8.0)
+      tty-color (~> 0.5)
+    public_suffix (4.0.6)
+    puts_debuggerer (0.10.0)
+      awesome_print (~> 1.8.0)
     rack (2.2.3)
     rake (13.0.1)
     rchardet (1.8.0)
@@ -64,11 +69,22 @@ GEM
       rspec-support (~> 3.5.0)
     rspec-support (3.5.0)
     semver (1.0.1)
-    simplecov (0.18.5)
+    simplecov (0.19.0)
       docile (~> 1.1)
       simplecov-html (~> 0.11)
     simplecov-html (0.12.2)
     thread_safe (0.3.6)
+    tty-color (0.5.2)
+    tty-cursor (0.7.1)
+    tty-prompt (0.22.0)
+      pastel (~> 0.8)
+      tty-reader (~> 0.8)
+    tty-reader (0.8.0)
+      tty-cursor (~> 0.7)
+      tty-screen (~> 0.8)
+      wisper (~> 2.0)
+    tty-screen (0.8.1)
+    wisper (2.0.1)
 
 PLATFORMS
   ruby
@@ -76,9 +92,11 @@ PLATFORMS
 DEPENDENCIES
   bundler (>= 1.0)
   juwelier (~> 2.1.0)
+  puts_debuggerer
   rdoc (~> 3.12)
   rspec (~> 3.5.0)
   simplecov
+  tty-prompt
 
 BUNDLED WITH
    2.1.4

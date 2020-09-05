@@ -1,0 +1,43 @@
+#!/usr/bin/env ruby
+
+version = File.read(File.expand_path('../../VERSION', __FILE__)).strip
+puts "== gdr-setup - ruby-bash version #{version} =="
+
+ruby = `which ruby`.strip
+command = "#{ruby} #{File.expand_path('../../lib/ruby-bash/gdr.rb', __FILE__)}"
+
+ruby_bash_gdr_script = <<~SHELL_SCRIPT
+  function gdr()
+  {
+    #{command}
+    if [ -f "$HOME/.ruby_bash_command_gdr" ]; then
+      source "$HOME/.ruby_bash_command_gdr"
+      rm "$HOME/.ruby_bash_command_gdr"
+    fi  
+  }
+SHELL_SCRIPT
+
+require 'fileutils'
+home_dir = `echo ~`.strip
+FileUtils.mkdir_p("#{home_dir}/bin")
+ruby_bash_source = "#{home_dir}/.ruby_bash_source"
+ruby_bash_source_bash_friendly_path = "$HOME/.ruby_bash_source"
+File.write(ruby_bash_source, ruby_bash_gdr_script)
+bash_profile_file_name = '.bash_profile'
+bash_profile_file = "#{home_dir}/#{bash_profile_file_name}"
+if !File.exist?(bash_profile_file)
+  bash_profile_file_name = '.bashrc' 
+  bash_profile_file = "#{home_dir}/#{bash_profile_file_name}"
+end
+FileUtils.touch(bash_profile_file)
+bash_profile = File.read(bash_profile_file)
+ruby_bash_source_statement = "source \"#{ruby_bash_source_bash_friendly_path}\""
+unless bash_profile.split("\n").detect {|line| line.include?(ruby_bash_source_statement) }
+  File.write(bash_profile_file, "#{bash_profile}\n#{ruby_bash_source_statement}")
+end
+puts <<~OUTPUT
+  ~/#{bash_profile_file_name} has been modified to source ruby-bash functions from ~/.ruby_bash_source
+  The following command has been added:
+  * `gdr` (go to directory): enables browsing and changing directories starting from current path
+  To use, open a new terminal or source ~/.ruby_bash_source manually
+OUTPUT

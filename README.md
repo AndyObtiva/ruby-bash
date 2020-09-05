@@ -1,9 +1,8 @@
-ruby-bash===================
+# ruby-bash
 
-Description goes here.
+User-Friendly Versions of Bash Commands Built in Ruby
 
-Contributing to ruby-bash
-------------------------------------------
+## Contributing to ruby-bash
 
 -   Check out the latest master to make sure the feature hasn't been
     implemented or the bug hasn't been fixed yet.
@@ -19,8 +18,8 @@ Contributing to ruby-bash
     is fine, but please isolate to its own commit so I can cherry-pick
     around it.
 
-Copyright
----------
+## License
 
-Copyright (c) 2020 Andy Maleh. See
-LICENSE.txt for further details.
+[MIT](LICENSE.txt)
+
+Copyright (c) 2020 Andy Maleh.
