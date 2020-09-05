@@ -1,6 +1,7 @@
 $LOAD_PATH.unshift(File.expand_path('../..', __FILE__))
 
-puts "== gdr (go to directory) - ruby-bash - version #{File.read(File.expand_path('../../../VERSION', __FILE__)).strip} =="
+version = File.read(File.expand_path('../../../VERSION', __FILE__)).strip
+puts "== gdr (go to directory) - ruby-bash v#{version} - Copyright (c) 2020 Andy Maleh - Licensed Under the GPLv3 =="
 
 require 'tty-prompt'
 require 'fileutils'
@@ -46,7 +47,7 @@ begin
     exception = nil
     dir_lines = `ls -l | grep '^d'`.split("\n")
     dir_lines = ['..'] + dir_lines unless FileUtils.pwd == '/'
-    dir_line = prompt.select("Choose a directory: ", dir_lines, cycle: true, per_page: 40, filter: true, help: "\nCurrent: #{FileUtils.pwd} (Type to filter / ESC to go back / CTRL+X to go to directory / CTRL+C to abort back to original path)#{"\n#{exception}" if exception}", show_help: :always)
+    dir_line = prompt.select("Choose a directory: ", dir_lines, cycle: true, per_page: 40, filter: true, help: "\nCurrent: #{FileUtils.pwd} (Type to filter / ENTER to navigate / ESC to go back / CTRL+X to go to directory / CTRL+C to abort back to original path)#{"\n#{exception}" if exception}", show_help: :always)
     
     dir = dir_line.split.last
     begin

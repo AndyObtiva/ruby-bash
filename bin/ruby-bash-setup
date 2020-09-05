@@ -2,7 +2,7 @@
 
 version = File.read(File.expand_path('../../VERSION', __FILE__)).strip
 puts
-puts "== gdr-setup - ruby-bash version #{version} =="
+puts "== gdr-setup - ruby-bash v#{version} - Copyright (c) 2020 Andy Maleh =="
 puts
 
 ruby = `which ruby`
@@ -45,7 +45,16 @@ ruby_bash_source_statement = "source \"#{ruby_bash_source_bash_friendly_path}\""
 unless bash_profile.split("\n").detect {|line| line.include?(ruby_bash_source_statement) }
   File.write(bash_profile_file, "#{bash_profile}\n#{ruby_bash_source_statement}")
 end
+license_file = File.expand_path('../../LICENSE.md', __FILE__)
 puts <<~OUTPUT
+  Licensed Under the GPL version 3;
+  ruby-bash comes with ABSOLUTELY NO WARRANTY; 
+  This is free software, and you are welcome to redistribute it under certain conditions;
+  For more details, visit this link: 
+  https://www.gnu.org/licenses/gpl-3.0-standalone.html
+  Or, run this command to open the included license file:
+  cat #{license_file}
+  
   ~/#{bash_profile_file_name} has been modified to source ruby-bash functions from ~/.ruby_bash_source
   
   The following command has been added:

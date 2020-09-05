@@ -15,13 +15,13 @@ Juwelier::Tasks.new do |gem|
   # gem is a Gem::Specification... see http://guides.rubygems.org/specification-reference/ for more options
   gem.name = "ruby-bash"
   gem.homepage = "http://github.com/AndyObtiva/ruby-bash"
-  gem.license = "MIT"
+  gem.license = "GPLv3"
   gem.summary = %Q{Ruby Bash}
   gem.description = %Q{User-Friendly Versions of Bash Commands Built in Ruby}
   gem.email = "andy.am@gmail.com"
   gem.authors = ["andy_maleh"]
   gem.executables = ['ruby-bash-setup']
-  gem.files = Dir['README.md', 'LICENSE.txt', 'VERSION', 'bin/**/*', 'lib/**/*']
+  gem.files = Dir['README.md', 'LICENSE*', 'CHANGELOG.md', 'VERSION', 'bin/**/*', 'lib/**/*']
   # dependencies defined in Gemfile
 end
 Juwelier::RubygemsDotOrgTasks.new
