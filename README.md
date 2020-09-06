@@ -90,9 +90,9 @@ Current: /Users/User/code/ruby-bash (Type to filter / ENTER to navigate / ESC to
 
 ## License
 
-[GPLv3](LICENSE.md)
+[GPL-3.0](LICENSE.md)
 
-**ruby-bash** - User-Friendly Versions of Bash Commands Built in Ruby
+ruby-bash - User-Friendly Versions of Bash Commands Built in Ruby
 
 Copyright (c) 2020 Andy Maleh
 
@@ -106,5 +106,5 @@ but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 
-You should have received a [copy](LICENSE.md) of the GNU General Public License
+You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.

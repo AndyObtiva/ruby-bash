@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0".freeze) if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib".freeze]
   s.authors = ["andy_maleh".freeze]
-  s.date = "2020-09-05"
+  s.date = "2020-09-06"
   s.description = "User-Friendly Versions of Bash Commands Built in Ruby".freeze
   s.email = "andy.am@gmail.com".freeze
   s.executables = ["ruby-bash-setup".freeze]
@@ -30,7 +30,7 @@ Gem::Specification.new do |s|
     "lib/ruby-bash/gdr.rb"
   ]
   s.homepage = "http://github.com/AndyObtiva/ruby-bash".freeze
-  s.licenses = ["GPLv3".freeze]
+  s.licenses = ["GPL-3.0".freeze]
   s.rubygems_version = "3.1.4".freeze
   s.summary = "Ruby Bash".freeze
 
