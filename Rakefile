@@ -1,19 +1,19 @@
 # encoding: utf-8
 
 # ruby-bash - User-Friendly Versions of Bash Commands Built in Ruby
-# 
+#
 # Copyright (c) 2020 Andy Maleh
-# 
+#
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
@@ -35,6 +35,7 @@ Juwelier::Tasks.new do |gem|
   gem.license = "GPL-3.0"
   gem.summary = %Q{Ruby Bash}
   gem.description = %Q{User-Friendly Versions of Bash Commands Built in Ruby}
+  gem.post_install_message = "\nTo finish setting up the ruby-bash Ruby gem in your shell environment, run: ruby-bash-setup\n\n"
   gem.email = "andy.am@gmail.com"
   gem.authors = ["andy_maleh"]
   gem.executables = ['ruby-bash-setup']
