@@ -1,5 +1,7 @@
 # TODO
 
+- Offer `gd` as a shorter alternative to `gdr`
+- Add a gemspec post_install_message 
 - Support zsh (adding source call to .zshrc)
 - Support Git Bash on Windows
 - Extend gdr filter to support absolute paths and more-than-one-directory-jump listing
