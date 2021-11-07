@@ -1,6 +1,7 @@
 # TODO
 
 - Offer `gd` as a shorter alternative to `gdr`
+- Add a video demonstrating every command
 - Add a gemspec post_install_message 
 - Support zsh (adding source call to .zshrc)
 - Support Git Bash on Windows
